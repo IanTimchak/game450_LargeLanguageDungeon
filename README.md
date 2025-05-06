@@ -17,7 +17,7 @@ Large Language Dungeons is an AI-based dungeon master client that uses large lan
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/IanTimchak/LLD.git
+   git clone https://github.com/IanTimchak/game450_LargeLanguageDungeon.git
 2. Install necessary dependencies
    ```bash
    npm install
