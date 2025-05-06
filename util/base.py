@@ -74,6 +74,11 @@ class DungeonMaster:
         # print(f"[DEBUG] session_info: {self.rag.peek()}")
 
         # Return a message to send to the players for this turn
+
+        #If the dm_message is an empty string, return the second to last message in the templatechat's messages
+        if dm_message == '':
+            dm_message = self.chat.messages[-2]['content']
+
         return dm_message 
 
     # @tool_tracker

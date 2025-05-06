@@ -147,13 +147,13 @@ class TemplateChat:
             except Exception as e:
                 print(f"[ERROR] Error processing tool call: {e}")
                 print("Continuing without tool response...")
-        else:
-            print(f"[DEBUG] No tool call detected")
-            self.messages.append({'role': 'tool',
-                                  'name': 'default',
-                                  'arguments': '{}',
-                                  'content': '[TCR][/TCR]'
-                                  })
+        # else:
+        #     print(f"[DEBUG] No tool call detected")
+        #     self.messages.append({'role': 'tool',
+        #                           'name': 'default',
+        #                           'arguments': '{}',
+        #                           'content': '[TCR][/TCR]'
+        #                           })
 
         #print last message of the chat messages
         print(f"\n\n[DEBUG] Last message: {self.messages[-1]}\n\n")
