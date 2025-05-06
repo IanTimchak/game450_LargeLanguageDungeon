@@ -1,22 +1,10 @@
 {
     "tools": [
+        
         {
             "type": "function",
             "function": {
-                "name": "retrieve_session_info",
-                "description": "Querys the Chromadb database containing past messages from the model for additional context.",
-                "parameters": {
-                    "query": {
-                        "type": "string",
-                        "description": "The string to search for in the database."
-                    }
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "retrieve_session_info",
+                "name": "search_session_history",
                 "description": "Querys the Chromadb database containing past messages from the model for additional context.",
                 "parameters": {
                     "query": {

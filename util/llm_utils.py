@@ -100,7 +100,7 @@ class TemplateChat:
         response = self.completion(**kwargs)
         message = response['message']
         self.messages.append({'role': message.role, 'content': message.content})
-        print(self.messages)
+        #print(self.messages)
         logging.info(f'{message.role}: {message.content}')
         return response 
 
