@@ -56,6 +56,15 @@ Infinite loop of attempting to do an operation on something that is not a socket
 
 - [Found a monster manual](https://gist.github.com/tkfu/9819e4ac6d529e225e9fc58b358c3479)
 
+- Implement tool calls defined in `dm_bryan.json`
+- Fill out report found in `Project.md`
+- Fill out Readme instructions for running the project.
+- Add documentation where necessary.
+- Find a way to implement multi-step reasoning.
+- Fine tune model parameters and prompt
+- Clean up repository root (including removing this file before submission)
+- 
+
 
 
 ## Project Files
