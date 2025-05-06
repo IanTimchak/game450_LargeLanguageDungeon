@@ -64,7 +64,7 @@ class ChromaDBClient:
                 chunked_documents.append({
                     "id": f"{document["id"]}_chunk_{i}",
                     "text": chunk,
-                    "metadata": {"source": document["id"], "chunk": i}
+                    "metadata": {"source": document["id"], "chunk": i}.append(document["metadata"])
                 })
 
         print(f"Created {len(chunked_documents)} chunks from {len(documents)} documents")
