@@ -100,3 +100,7 @@ Finalize project.md, go over the system prompt and notice what I changed for pro
 Clean up repo
 
 Make sure everything is working so it works on submission
+
+requirements.txt
+generate with python
+pip freeze = NO

@@ -21,7 +21,7 @@ Large Language Dungeons is an AI-based dungeon master client that uses large lan
 2. Install necessary dependencies
    ```bash
    npm install
-   pip install ollama, chromadb, langchain, eel
+   pip install -r requirements.txt
 3. Install [Ollama](https://ollama.com/), if it is not already on your system.
 4. Pull the necessary models from Ollama.
    ```bash
