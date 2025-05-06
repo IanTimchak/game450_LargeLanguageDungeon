@@ -24,7 +24,9 @@ class ChromaDBClient:
         """
         print(f"[DEBUG] Adding {len(documents)} documents to ChromaDB collection '{self.collection_name}'")
         
-
+        #Check if any documents are an empty string or none
+        if any(doc["text"] == "" or doc["text"] is None for doc in documents):
+            return
 
         if chunk:
 

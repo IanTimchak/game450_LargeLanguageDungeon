@@ -154,6 +154,9 @@ class TemplateChat:
                                   'arguments': '{}',
                                   'content': '[TCR][/TCR]'
                                   })
+
+        #print last message of the chat messages
+        print(f"\n\n[DEBUG] Last message: {self.messages[-1]}\n\n")
         response = self.chat_turn(**kwargs)
         return response
     

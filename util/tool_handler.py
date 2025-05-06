@@ -42,9 +42,9 @@ class ToolHandler:
         Returns:
             dict: A dictionary containing the individual rolls, total roll, and modifier.
         """
-        if min_roll > max_roll:
+        if int(min_roll) > int(max_roll):
             return "invalid input parameters. Please disregard this message and prompt the players for clarification."
-        if quantity < 1:
+        if int(quantity) < 1:
             return "invalid input parameters. Please disregard this message and prompt the players for clarification."
 
         rolls = [random.randint(min_roll, max_roll) for _ in range(quantity)]
@@ -68,7 +68,7 @@ class ToolHandler:
         Returns:
             str: A generated event description.
         """
-        if complexity < 1 or complexity > 5:
+        if int(complexity) < 1 or int(complexity) > 5:
             return "invalid input parameters. Please disregard this message and prompt the players for clarification."
 
         print(f'[DEBUG] generate_event called with prompt="{prompt}" and complexity={complexity}')
@@ -155,7 +155,7 @@ class ToolHandler:
                     })
 
         # Convert the result to a stringified JSON
-        result = json.dumps(player_sheets_data, indent=2)
+        result = json.dumps(player_sheets_data, indent=0)
         print(f'[DEBUG] Retrieved player sheet data: {result}')
 
         return result
