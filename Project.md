@@ -26,7 +26,7 @@
 
 8. Creating new, interesting, and fleshed out NPCs.
 
-9. Playing sounds and music for the players.
+9. Playing sounds for the players.
 
 ### The following sections will go into more detail about how some of the prior scenarios were implemented.
 
@@ -36,7 +36,7 @@
 
 - Scenario 5 was achieved through a pair of RAG implementation and a custom tool call. Using our RAG database that includes previous DM messages, we defined a tool call titled `retrieve_session_info` that queries the database for information relevant to the search string it provides. The effect of this is that the DM has an enhanced ability to recall prior information from earlier in a session.
 
-- Scenario 6 can be accomplished using the `roll_dice` tool call. The DM model has access to the `player`, `max_roll`, `min_roll`, `quantity`, and `modifier` parameters. These control who the roll is for (in the case of multiple players), the highest and lowest values on the die, the amount of dice being rolled, and the modifier to the roll if any (such as a siler sword doing +1 damage against vampires).
+- Scenario 6 can be accomplished using the `roll_dice` tool call. The DM model has access to the `player`, `max_roll`, `min_roll`, `quantity`, and `modifier` parameters. These control who the roll is for (in the case of multiple players), the highest and lowest values on the die, the amount of dice being rolled, and the modifier to the roll if any (such as a silver sword doing +1 damage against vampires).
 
 - Scenario 7 is possible through a tool call simply named `generate_event`. This event activates a separate LLM template, and asks it to generate a new event based upon a context string passed to it by the DM and a desired complexity level.
 
@@ -53,3 +53,5 @@
 ## 6: Additional Tools or Innovations
 
 For our additional innovation, we have a simple and easy to use UI for players to interact with the AI model. When you launch the app, it brings you first to a connection screen, where you can choose the server host and port information, as well as your name for the session. Once you connect, you will be in a sleek, scrollable, and readable chat window with the AI model.
+
+We also have our audio tool call, which allows the DM to play sound effects that fit the current situation of the game. These sound effects play on the players' client machines when the DM sends out its response.

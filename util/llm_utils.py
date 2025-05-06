@@ -147,8 +147,13 @@ class TemplateChat:
             except Exception as e:
                 print(f"[ERROR] Error processing tool call: {e}")
                 print("Continuing without tool response...")
-
-        
+        else:
+            print(f"[DEBUG] No tool call detected")
+            self.messages.append({'role': 'tool',
+                                  'name': 'default',
+                                  'arguments': '{}',
+                                  'content': '[TCR][/TCR]'
+                                  })
         response = self.chat_turn(**kwargs)
         return response
     

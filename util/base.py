@@ -1,11 +1,13 @@
-
-
 from util.dndnetwork import DungeonMasterServer, PlayerClient
 from util.llm_utils import TemplateChat
 from util.ragu import ChromaDBClient as chroma, OllamaEmbeddingFunction
 from util.tool_handler import ToolHandler
 import os, json
 
+
+# This function is responsible for compiling the sounds from the web/sounds directory
+# It returns a string representation of the list of sound names (without extensions)
+# This is used to send the sounds to the template for use in the game
 def compile_sounds():
     sounds = []
     for filename in os.listdir('web/sounds'):
@@ -27,10 +29,12 @@ class DungeonMaster:
         self.chat = TemplateChat.from_file('util/templates/dm_bryan.json', 
                                            sign='hellogamers',
                                            process_response=TemplateChat.process_response,
+                                           #provide a reference to the server for TemplateChat to use
                                            dungeon_master=self,
                                            sounds=compile_sounds(),
                                            tool_definitions=stringify_tools())
         self.start = True
+        # Initialize the ChromaDB client as a member variable
         self.rag = chroma(
             collection_name='session_info',
             embedding_function=OllamaEmbeddingFunction(model_name='nomic-embed-text')
@@ -58,7 +62,7 @@ class DungeonMaster:
             
             dm_message = self.chat.send(turn_string)
 
-        # Process the DM's message and update the game log
+        # Adding the DM's message to the session_info collection
         self.rag.add_documents([
             {
                 'id': 'dm_message_' + str(len(self.game_log)),
