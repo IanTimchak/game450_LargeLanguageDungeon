@@ -76,7 +76,7 @@ class TemplateChat:
         self.instance = template
         self.instance['options']['seed'] = hash(str(sign))
         self.messages = self.instance['messages']
-        self.dungeon_master = kwargs['dungeon_master'] if 'dungeon_master' in kwargs else None
+        self.dungeon_master = kwargs['dungeon_master'] if 'dungeon_master' in kwargs else None #Used to call the DungeonMaster ToolHandler
         self.end_regex = kwargs['end_regex'] if 'end_regex' in kwargs else None
         self.function_caller = kwargs['function_call_processor'] if 'function_call_processor' in kwargs else None
         process_response_method = kwargs['process_response'] if 'process_response' in kwargs else lambda self, x: x 
@@ -148,6 +148,11 @@ class TemplateChat:
                                             'content': '[TCR] ' + self.dungeon_master.tool_handler.process_function_call(call.function) + ' [/TCR]'
                                             })
             except Exception as e:
+                """
+                This is a catch-all for any errors that occur during the processing of the tool call.
+                This includes errors that occur when the tool call is not valid, or when the tool call cannot be processed.
+                Most commonly, this is due to the tool call not being in the correct format, due to the LLM hallucinating a tool definition.
+                """
                 print(f"[ERROR] Error processing tool call: {e}")
                 print("Continuing without tool response...")
         # else:
