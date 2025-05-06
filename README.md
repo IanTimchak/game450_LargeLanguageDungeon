@@ -29,15 +29,10 @@ Large Language Dungeons is an AI-based dungeon master client that uses large lan
    ```
 
 ## Running the application
-### Starting the Game Server
-In order to start the game server, run `game.py` in a dedicated terminal.
-Once it is running, a countdown will begin for all players to connect to
-the server.
-
-### Starting the Player Client
-To start the player client, run `app.py` in a dedicated terminal. This will
-launch an electron application to host the UI for interacting with the
-LLM server. Input the host and port of the server (found in `dndnetwork.py`)
-and your player name for the session. Do this within the server countdown, and
-you will join the LLM server.
-   
+1. Run `app.py` in a dedicated terminal.
+   - This will launch an electron application that brings you to the server connection screen. Input the server host and port (defined in `dndnetwork.py`) and your player name for the session.
+   - **DON'T click join yet**.
+2. Run `game.py` in a dedicated terminal.
+   - This starts up the game server which hosts the LLM and all other game logic. Once this starts up, a countdown begins for all players to join the game.
+3. Return to the electron app and click **JOIN**.
+   - The server connection screen will be replaced by the chat window where you interact with the Dungeon Master LLM. Once the countdown ends, the DM will make its first response.
