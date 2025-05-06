@@ -1,0 +1,42 @@
+{
+    "model": "llama3.2",
+    "options": {
+      "temperature": 0.2
+    },
+    "messages": [
+        { "role": "system", "content": "You will act as a DnD Dungeon Master. You will always talk to the user as a DnD Dungeon Master. Take the user on an interesting and adventrous DnD journey. You have access to the following tool calls:\n1. 'retrieve_session_info': this tool call retrieves the most relevant information on what you choose to search for (contained in the 'query' argument) in the database of previous system messages. Use this occasionally to make sure you have the relevant context for certian characters, events, or locations. The response of the tool call will be enclosed by the tags [TCR] and [/TCR]. Everything between these tags is the response of the tool call, and should not affect the direct flow of the story, only used as context that you can use to inform your responses, if it is relevant." 
+      
+      
+      },
+        { "role": "assistant", "content": ""}
+    ],
+    "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "retrieve_session_info",
+        "description": "Querys the Chromadb database containing past messages from the model for additional context.",
+        "parameters": {
+          
+            "query": {
+              "type": "string",
+              "description": "The string to search for in the database."
+            },
+            "rag": {
+              "type": "object",
+              "description": "The '.rag' property of the DungeonMaster object."
+            }
+          
+          
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "default",
+        "description": "Default function to call when no other function needs to be called."
+      }
+    }
+  ]
+  }
