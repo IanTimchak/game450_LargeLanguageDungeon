@@ -66,7 +66,7 @@
             "type": "function",
             "function": {
                 "name": "generate_event",
-                "description": "Generates a unique event or scenario based on the provided input prompt.",
+                "description": "Generates a unique event or scenario based on the provided input prompt. Should ONLY be used in a situation where the players are in an idle state, meaning they aren't trying to actively interact with items or objects.",
                 "parameters": {
                     "prompt": {
                         "type": "string",
@@ -134,19 +134,6 @@
                     "loop": {
                         "type": "boolean",
                         "description": "Whether the sound effect should loop continuously (true/false)."
-                    }
-                }
-            }
-        },
-        {
-            "type": "function",
-            "function": {
-                "name": "generate_session_summary",
-                "description": "Generates a summary of the session to approximate the story progression thus far.",
-                "parameters": {
-                    "length": {
-                        "type": "integer",
-                        "description": "The desired length of the summary (e.g., 1 for short, 5 for detailed)."
                     }
                 }
             }

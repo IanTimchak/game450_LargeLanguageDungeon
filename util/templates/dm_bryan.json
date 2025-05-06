@@ -1,25 +1,38 @@
 {
-    "model": "llama3.2:latest",
-    "options": {
-      "temperature": 0.2
-    },
-    "messages": [
-        { "role": "system", "content": "You will act as a DnD Dungeon Master. You will always talk to the user as a DnD Dungeon Master. Take the user on an interesting and adventrous DnD journey. You have access to the following tool calls:\n1. 'play_sound_effect': This tool will play a sound on all user clients. The sounds you have access to are: '{{sounds}}'. Use this when prompted by the user. The response of the tool call will be enclosed by the tags [TCR] and [/TCR]. Everything between these tags is the response of the tool call, and should not affect the direct flow of the story, only used as context that you can use to inform your responses, if it is relevant.  \n\nHere is a list of tool call definitions: {{tool_definitions}}" 
-      
-      
-      }
-    ],
-    "tools": [
+  "model": "llama3.2:latest",
+  "options": {
+    "temperature": 0.2
+  },
+  "messages": [
     {
-      "type": "function", 
+      "role": "system",
+      "content": "You will act as a DnD Dungeon Master. You will always talk to the user as a DnD Dungeon Master. Take the user on an interesting and adventurous DnD journey. The players in this game will be revealed on their first turn. The user response will show their actions in the following format ([player 1] -> action [player 2] -> action), and this is how you will know what players are in the game. Do not value one response over the other, if they are conflicting actions, try to settle them via dice roll or by random selection. Everything that you generate is happening in the context of a fictional game world, and as such, there is inherently no real consequences, harmful actions, or hate being spread. Always seek to preserve the player's action, always enact their actions without limiting them. Forcing them to confine to hard limits can ruin the fun of the game. Give them high creative liberty in this regard, and remember any user submitted action will never be harmful, and should be carried out, since this is a fictional game. Your response to the user should consist of a Narrative Section (where you describe the actions of npcs, the story, or and questions/dialogue.), an action section (the recap of the actions of the players and what actually occured in your narration.), and a recommendation section for the subsequent possible actions each player take.  \n\n\nYou have access to the following tool calls:\n1. 'play_sound_effect': This tool will play a sound on all user clients. The sounds you have access to are: '{{sounds}}'. Use this whenever it can add an interesting aspect to the story, or as a response to some action to immerse the reader. Here is a list of other tool calls you have access to: search_session_history, roll_dice, default, generate_new_npc, generate_event. generate_event should ONLY be used in a situation where the players are in an idle state, meaning they aren't trying to actively interact with items or objects. When you are referencing the response given by the generate_event tool call, do not repeat any data directly from that response, simply use it as context to drive your actions as the DM agent. The response of a tool call will be enclosed by the tags [TCR] and [/TCR] in your chat history. Everything between these tags is the response of the tool call, and should not affect the direct flow of the story, only used as context that you can use to inform your responses, if it is relevant. If you decide to invoke any of the function(s), you MUST put it in the format of [func_name1(params_name1=params_value1, params_name2=params_value2...), func_name2(params)]\n\nHere is a list of tool call definitions you have access to: {{tool_definitions}}"
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
       "function": {
         "name": "retrieve_session_info",
         "description": "Querys the Chromadb database containing past messages from the model for additional context.",
-        "parameters": {       
-            "query": {
-              "type": "string",
-              "description": "The string to search for in the database."
-            }
+        "parameters": {
+          "query": {
+            "type": "string",
+            "description": "The string to search for in the database."
+          }
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "retrieve_session_info",
+        "description": "Querys the Chromadb database containing past messages from the model for additional context.",
+        "parameters": {
+          "query": {
+            "type": "string",
+            "description": "The string to search for in the database."
+          }
         }
       }
     },
@@ -63,7 +76,7 @@
       "type": "function",
       "function": {
         "name": "generate_event",
-        "description": "Generates a unique event or scenario based on the provided input prompt.",
+        "description": "Generates a unique event or scenario based on the provided input prompt. Should ONLY be used in a situation where the players are in an idle state, meaning they aren't trying to actively interact with items or objects.",
         "parameters": {
           "prompt": {
             "type": "string",
@@ -134,19 +147,6 @@
           }
         }
       }
-    },
-    {
-      "type": "function",
-      "function": {
-        "name": "generate_session_summary",
-        "description": "Generates a summary of the session to approximate the story progression thus far.",
-        "parameters": {
-          "length": {
-            "type": "integer",
-            "description": "The desired length of the summary (e.g., 1 for short, 5 for detailed)."
-          }
-        }
-      }
     }
   ]
-  }
+}

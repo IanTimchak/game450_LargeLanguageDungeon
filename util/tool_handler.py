@@ -17,7 +17,7 @@ class ToolHandler:
             raise AttributeError(f"Method '{name}' not found in DungeonMaster.")
     
     #RAG
-    def retrieve_session_info(self, query: str = "search") -> str:
+    def search_session_history(self, query: str = "search") -> str:
         print(f'[DEBUG] retrieve_session_info called with query: {query}')
         documents = self.network_model.rag.query(query, 3)
         print(f'[DEBUG] Retrieved documents: {documents}')
@@ -176,8 +176,11 @@ class ToolHandler:
         if not sound_name:
             return "invalid input parameters. Please provide a valid sound_name."
 
-        if int(volume) < 1 or int(volume) > 10:
-            return "invalid input parameters. Volume must be between 1 and 10."
+        if type(volume) == int:
+            if int(volume) < 1 or int(volume) > 10:
+                volume = 3
+        else:
+            volume = 3
 
         print(f'[DEBUG] play_sound_effect called with sound_name="{sound_name}", volume={volume}, loop={loop}')
 

@@ -22,6 +22,7 @@ def stringify_tools():
         tools = json.load(file)
     return json.dumps(tools, indent=0)
 
+
 class DungeonMaster:
     def __init__(self):
         self.game_log = ['START']
@@ -32,7 +33,8 @@ class DungeonMaster:
                                            #provide a reference to the server for TemplateChat to use
                                            dungeon_master=self,
                                            sounds=compile_sounds(),
-                                           tool_definitions=stringify_tools())
+                                           tool_definitions=stringify_tools(),
+                                           players=self.server.get_player_names())
         self.start = True
         # Initialize the ChromaDB client as a member variable
         self.rag = chroma(
