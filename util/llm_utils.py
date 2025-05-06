@@ -116,13 +116,13 @@ class TemplateChat:
         if response.message.tool_calls:
             try:
                 for call in response.message.tool_calls:
-                    if call.function.name == 'retrieve_session_info':
-                        print(f"[DEBUG] tool Call detected: {call.function.name}")
-                        self.messages.append({'role': 'tool',
-                                                'name': call.function.name,
-                                                'arguments': call.function.arguments,
-                                                'content': '[TCR] ' + self.dungeon_master.process_function_call(call.function) + ' [/TCR]'
-                                                })
+                    print(call)
+                    print(f"[DEBUG] tool Call detected: {call.function.name}")
+                    self.messages.append({'role': 'tool',
+                                            'name': call.function.name,
+                                            'arguments': call.function.arguments,
+                                            'content': '[TCR] ' + self.dungeon_master.process_function_call(call.function) + ' [/TCR]'
+                                            })
             except Exception as e:
                 print(f"[ERROR] Error processing tool call: {e}")
                 print("Continuing without tool response...")

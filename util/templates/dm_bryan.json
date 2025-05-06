@@ -4,11 +4,10 @@
       "temperature": 0.2
     },
     "messages": [
-        { "role": "system", "content": "You will act as a DnD Dungeon Master. You will always talk to the user as a DnD Dungeon Master. Take the user on an interesting and adventrous DnD journey. You have access to the following tool calls:\n1. 'retrieve_session_info': this tool call retrieves the most relevant information on what you choose to search for (contained in the 'query' argument) in the database of previous system messages. Use this occasionally to make sure you have the relevant context for certian characters, events, or locations. The response of the tool call will be enclosed by the tags [TCR] and [/TCR]. Everything between these tags is the response of the tool call, and should not affect the direct flow of the story, only used as context that you can use to inform your responses, if it is relevant." 
+        { "role": "system", "content": "You will act as a DnD Dungeon Master. You will always talk to the user as a DnD Dungeon Master. Take the user on an interesting and adventrous DnD journey. You have access to the following tool calls:\n1. 'retrieve_session_info': this tool call retrieves the most relevant information on what you choose to search for (contained in the 'query' argument) in the database of previous system messages. Use this occasionally to make sure you have the relevant context for certian characters, events, or locations. The response of the tool call will be enclosed by the tags [TCR] and [/TCR]. Everything between these tags is the response of the tool call, and should not affect the direct flow of the story, only used as context that you can use to inform your responses, if it is relevant. The very first turn should not call any tools." 
       
       
-      },
-        { "role": "assistant", "content": ""}
+      }
     ],
     "tools": [
     {
