@@ -17,7 +17,7 @@ import threading
 import time
 
 class DungeonMasterServer:
-    def __init__(self, game_log, dm_hook=lambda : '', host="172.16.108.58", port=10998, countdown=20):
+    def __init__(self, game_log, dm_hook=lambda : '', host="localhost", port=19742, countdown=20):
         self.host = host
         self.port = port
         self.countdown = countdown

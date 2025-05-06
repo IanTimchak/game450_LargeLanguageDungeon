@@ -46,7 +46,7 @@ class DungeonMaster:
             }
         ])
 
-        print(f"[DEBUG] session_info: {self.rag.peek()}")
+        # print(f"[DEBUG] session_info: {self.rag.peek()}")
 
         # Return a message to send to the players for this turn
         return dm_message 
@@ -65,7 +65,7 @@ class DungeonMaster:
     #Tool
     def retrieve_session_info(self, query: str = "search") -> str:
         print(f'[DEBUG] retrieve_session_info called with query: {query}')
-        documents = self.rag.query(query, 1)
+        documents = self.rag.query(query, 3)
         print(f'[DEBUG] Retrieved documents: {documents}')
         return "\n".join(documents[0])
         pass

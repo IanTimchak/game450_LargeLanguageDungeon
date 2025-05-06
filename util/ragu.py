@@ -1,6 +1,7 @@
 import chromadb
 import ollama
-from typing import List
+from typing import List, Dict
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
 class ChromaDBClient:
@@ -17,29 +18,57 @@ class ChromaDBClient:
             embedding_function=embedding_function
         )
 
-    def add_documents(self, documents: list, batch_size: int = 10):
+    def add_documents(self, documents: list, batch_size: int = 10, chunk: bool = True):
         """
         Add documents to the collection
         """
         print(f"[DEBUG] Adding {len(documents)} documents to ChromaDB collection '{self.collection_name}'")
-        """ This is a batched implementation of adding documents, may give better performance."""
+        
 
-        for i in range(0, len(documents), batch_size):
-            batch = documents[i:i + batch_size]
-            self.collection.add(
-                ids=[doc[f"id"] for doc in batch].append(i),
-                documents=[doc["text"] for doc in batch],
-                metadatas=[doc["metadata"] for doc in batch]
-            )
-            
-        """
+
+        if chunk:
+
+            documents = self.chunk_documents(documents=documents)
+
+
+        
         self.collection.add(
             ids=[doc["id"] for doc in documents],
             documents=[doc["text"] for doc in documents],
             metadatas=[doc["metadata"] for doc in documents]
         )
-        """
+        
         print(f"[DEBUG] Added {len(documents)} documents to ChromaDB collection '{self.collection_name}'")
+
+    def chunk_documents(self, documents, chunk_size: int = 500, chunk_overlap: int = 50):
+        """
+        Split documents into smaller chunks for embedding,
+        using LangChain's RecursiveCharacterTextSplitter
+        """
+        chunked_documents = []
+
+        # Create the chunker with specified parameters
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=chunk_size,
+            chunk_overlap=chunk_overlap,
+            length_function=len
+        )
+
+
+        # Apply the chunker to the document text
+
+        
+        for document in documents:
+            chunks = text_splitter.split_text(document["text"])
+            for i, chunk in enumerate(chunks):
+                chunked_documents.append({
+                    "id": f"{document["id"]}_chunk_{i}",
+                    "text": chunk,
+                    "metadata": {"source": document["id"], "chunk": i}
+                })
+
+        print(f"Created {len(chunked_documents)} chunks from {len(documents)} documents")
+        return chunked_documents
 
     def query(self, query_text: str, n_results: int = 5):
         """
