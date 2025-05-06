@@ -24,19 +24,19 @@
 - Needs to implement **multi-step reasoning**
   
 - Needs to implement **Tool usage**
-  - Template Loading Tool
+  - [ ] Template Loading Tool
     - PARAMS: Template Name, Context, tbd.
-  - Image Generation Tool
-  - Dice Rolling Tool / Skill Check Tool
-  - Story Recall Tool (RAG)
-  - Add chunk to RAG database
-  - Enemy/Player information lookup
-  - session info loading
-  - session summary generation
-  - side quest/event generator
-  - text to speech
-  - loot generator
-  - Rule quereying
+  - [ ] Image Generation Tool
+  - [ ] Dice Rolling Tool / Skill Check Tool
+  - [x] Story Recall Tool (RAG)
+  - [x] Add chunk to RAG database
+  - [ ] Enemy/Player information lookup
+  - [ ] session info loading
+  - [ ] session summary generation
+  - [ ] side quest/event generator
+  - [ ] text to speech
+  - [ ] loot generator
+  - [ ] Rule quereying
     - PURPOSE: Query the D&D rule book for information and rules found in D&D5e
   
 - Needs to implement **An additional thing**
