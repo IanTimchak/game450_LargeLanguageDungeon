@@ -8,7 +8,7 @@
 
 ## 1: Base System Functionality
 
-### This section details a comprehensive list of scenarios that our AI model is equipped to handle:
+This section details a comprehensive list of scenarios that our AI model is equipped to handle:
 
 1. Generating and describing a setting in a fictional world for the players (the users) to interact with.
 
@@ -28,9 +28,41 @@
 
 9. Playing sounds for the players.
 
-### The following sections will go into more detail about how some of the prior scenarios were implemented.
+The following sections will go into more detail about how some of the prior scenarios were implemented.
 
 ## 2: Prompt Engineering and Model Parameters
+
+Our project has 3 templates, with 1 being the main DM and the other 2 being called upon with tool calls. The templates are as follows:
+
+
+
+**MAIN_DM_TEMPLATE**
+
+- Purpose: This template is the main DM instance, and is what the players will be interacting with. It is in charge of driving the plot, responding to player input, making calls to tools when necessary, and handling input from those tool calls.
+
+- Parameters:
+  
+  - temerature: We set the temperature value to a low `0.2`. We felt that a low temperature makes sence for this template, as it is both in charge of keeping track of the story and, more importantly, making tool calls that require a structured format.
+
+- Prompts:
+  
+  - The prompt for the main DM template covers the many duties that the DM is supposed to handle, and addresses many problems that the DM consistantly displayed over the course of the project. Here is a breakdown of the prompt:
+  
+  - First, It tells the DM to intruduce itself as the DM and ask the players for introductions, and remember those as the players that will be playing in the session. 
+  
+  - For our team, the DM had a habit of hallucinating extra players, so the next portion of the system prompt addresses this problem.
+  
+  - Next, we tell the DM not to value any one player's response over another's.
+  
+  - Following that, we reinforce the idea that the DM is narrating a fictional setting, because toward the end of the project the llama3.2 model's sensitive content filter starting acting much more aggressively and wouldn't allow anything it considered "violent," such as Dungeon's and Dragon's combat.
+  
+  - After addressing all of those problems, the next section focuses on defining a three section format for the DM's output.
+  
+  - Finally, the last portion of the system prompt (after the newlines) focuses on the tool calls that the model can make.
+
+**event_generator**
+
+- Purpose: this template is 
 
 ## 3: Tool Usage
 
