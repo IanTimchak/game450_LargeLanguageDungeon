@@ -131,6 +131,9 @@ class TemplateChat:
 #Newly defined functions starting here
 #----------------------------------------------------------------------------------------------------------------------
 #----------------------------------------------------------------------------------------------------------------------
+
+# This function is used to process any tool calls made by the LLM.
+# It takes the response from the LLM and processes it to extract tool calls and their arguments.
     def process_response(self, response, **kwargs):
         print(f"[DEBUG] processing response")
         print(f"[DEBUG] response: {response.message.tool_calls}")

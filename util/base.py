@@ -3,6 +3,7 @@ from util.llm_utils import TemplateChat
 from util.ragu import ChromaDBClient as chroma, OllamaEmbeddingFunction
 from util.tool_handler import ToolHandler
 import os, json
+from threading import Thread
 
 
 # This function is responsible for compiling the sounds from the web/sounds directory
@@ -63,13 +64,16 @@ class DungeonMaster:
             dm_message = self.chat.send(turn_string)
 
         # Adding the DM's message to the session_info collection
-        self.rag.add_documents([
-            {
-                'id': 'dm_message_' + str(len(self.game_log)),
-                'text': dm_message,
-                'metadata': {'role': 'dm'}
-            }
-        ])
+        # This is done in a separate thread to avoid blocking the main thread
+        def add_to_rag(game_log, dm_message):
+            self.rag.add_documents([
+                {
+                    'id': 'dm_message_' + str(len(game_log)),
+                    'text': dm_message,
+                    'metadata': {'role': 'dm'}
+                }
+            ]) 
+        Thread(target=add_to_rag, args=(self.game_log, dm_message)).start()
 
         # print(f"[DEBUG] session_info: {self.rag.peek()}")
 
@@ -80,32 +84,6 @@ class DungeonMaster:
             dm_message = self.chat.messages[-2]['content']
 
         return dm_message 
-
-    # @tool_tracker
-    # def process_function_call(self, function_call):
-    #     name = function_call.name
-    #     args = function_call.arguments
-
-    #     if hasattr(self, name):
-    #         method = getattr(self, name)  # Get the method by name
-    #         return method(**args)  # Call the method with the provided arguments
-    #     else:
-    #         raise AttributeError(f"Method '{name}' not found in DungeonMaster.")
-    
-    #Tool
-    # def retrieve_session_info(self, query: str = "search") -> str:
-    #     print(f'[DEBUG] retrieve_session_info called with query: {query}')
-    #     documents = self.rag.query(query, 3)
-    #     print(f'[DEBUG] Retrieved documents: {documents}')
-    #     return "\n".join(documents[0])
-    #     pass
-
-    # #Tool
-    # def default(self):
-    #     print(f'[DEBUG] default tool called')
-    #     return ""
-    #     pass
-
 
 
 class Player:

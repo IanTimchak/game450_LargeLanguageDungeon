@@ -1,3 +1,6 @@
+#This file contains the ChromaDBClient class, which is used to interact with the ChromaDB database.
+# It provides methods to add documents, query the database, and manage the collection.
+# It also includes the OllamaEmbeddingFunction class, which is used to generate embeddings for the documents using the Ollama API.
 import chromadb
 import ollama
 from typing import List, Dict
@@ -18,7 +21,7 @@ class ChromaDBClient:
             embedding_function=embedding_function
         )
 
-    def add_documents(self, documents: list, batch_size: int = 10, chunk: bool = True):
+    def add_documents(self, documents: list, chunk: bool = True):
         """
         Add documents to the collection
         """
@@ -28,12 +31,12 @@ class ChromaDBClient:
         if any(doc["text"] == "" or doc["text"] is None for doc in documents):
             return
 
+        #If the boolean argument 'chunk' is true, chunk the documents into smaller pieces.
         if chunk:
-
             documents = self.chunk_documents(documents=documents)
 
 
-        
+        #Adding the documents to the collection.
         self.collection.add(
             ids=[doc["id"] for doc in documents],
             documents=[doc["text"] for doc in documents],
