@@ -1,0 +1,155 @@
+{
+    "tools": [
+        {
+            "type": "function",
+            "function": {
+                "name": "retrieve_session_info",
+                "description": "Querys the Chromadb database containing past messages from the model for additional context.",
+                "parameters": {
+                    "query": {
+                        "type": "string",
+                        "description": "The string to search for in the database."
+                    }
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "retrieve_session_info",
+                "description": "Querys the Chromadb database containing past messages from the model for additional context.",
+                "parameters": {
+                    "query": {
+                        "type": "string",
+                        "description": "The string to search for in the database."
+                    }
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "default",
+                "description": "Default function to call when no other function needs to be called."
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "roll_dice",
+                "description": "Simulates rolling dice for skill checks, combat, or other game mechanics.",
+                "parameters": {
+                    "player": {
+                        "type": "string",
+                        "description": "The player that the roll is attributed towards."
+                    },
+                    "max_roll": {
+                        "type": "integer",
+                        "description": "The maximum roll value."
+                    },
+                    "min_roll": {
+                        "type": "integer",
+                        "description": "The minimum roll value."
+                    },
+                    "quantity": {
+                        "type": "integer",
+                        "description": "The number of dice to roll."
+                    },
+                    "modifier": {
+                        "type": "integer",
+                        "description": "A modifier to add or subtract from the total roll (default is 0)."
+                    }
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "generate_event",
+                "description": "Generates a unique event or scenario based on the provided input prompt.",
+                "parameters": {
+                    "prompt": {
+                        "type": "string",
+                        "description": "A brief description or idea to base the event on."
+                    },
+                    "complexity": {
+                        "type": "integer",
+                        "description": "The complexity level of the event (e.g., 1 for simple, 5 for highly detailed)."
+                    }
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "generate_new_npc",
+                "description": "Generates a random NPC description with personality traits, appearance, and role.",
+                "parameters": {
+                    "role": {
+                        "type": "string",
+                        "description": "The role of the NPC (e.g., 'merchant', 'villager', 'warrior')."
+                    },
+                    "background": {
+                        "type": "string",
+                        "description": "A brief background or story for the NPC."
+                    }
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "retrieve_active_player_sheets",
+                "description": "Retrieves all active player character sheets for the current session.",
+                "parameters": {
+                    "include_inventory": {
+                        "type": "boolean",
+                        "description": "Whether to include the players' inventory details (true/false)."
+                    },
+                    "include_stats": {
+                        "type": "boolean",
+                        "description": "Whether to include the players' stats (true/false)."
+                    },
+                    "include_skills": {
+                        "type": "boolean",
+                        "description": "Whether to include the players' skills (true/false)."
+                    }
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "play_sound_effect",
+                "description": "Plays a sound effect on the user client.",
+                "parameters": {
+                    "sound_name": {
+                        "type": "string",
+                        "description": "The name or identifier of the sound effect to play (e.g., 'dice_roll', 'sword_clash')."
+                    },
+                    "volume": {
+                        "type": "integer",
+                        "description": "The volume level of the sound effect (e.g., 1 for low, 10 for maximum)."
+                    },
+                    "loop": {
+                        "type": "boolean",
+                        "description": "Whether the sound effect should loop continuously (true/false)."
+                    }
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "generate_session_summary",
+                "description": "Generates a summary of the session to approximate the story progression thus far.",
+                "parameters": {
+                    "length": {
+                        "type": "integer",
+                        "description": "The desired length of the summary (e.g., 1 for short, 5 for detailed)."
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -4,7 +4,21 @@ from util.dndnetwork import DungeonMasterServer, PlayerClient
 from util.llm_utils import TemplateChat
 from util.ragu import ChromaDBClient as chroma, OllamaEmbeddingFunction
 from util.tool_handler import ToolHandler
+import os, json
 
+def compile_sounds():
+    sounds = []
+    for filename in os.listdir('web/sounds'):
+        if filename.endswith('.wav') or filename.endswith('.mp3'):
+            sound_name = filename[:-4]  # Remove the extension
+            sounds.append(sound_name)
+    return str(sounds)[1:-1]
+
+#Load the json file in utils tool_list and dump it/stringify it to sent to the template
+def stringify_tools():
+    with open('util/tool_list.json', 'r') as file:
+        tools = json.load(file)
+    return json.dumps(tools, indent=0)
 
 class DungeonMaster:
     def __init__(self):
@@ -13,7 +27,9 @@ class DungeonMaster:
         self.chat = TemplateChat.from_file('util/templates/dm_bryan.json', 
                                            sign='hellogamers',
                                            process_response=TemplateChat.process_response,
-                                           dungeon_master=self)
+                                           dungeon_master=self,
+                                           sounds=compile_sounds(),
+                                           tool_definitions=stringify_tools())
         self.start = True
         self.rag = chroma(
             collection_name='session_info',

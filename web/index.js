@@ -35,7 +35,7 @@ $(document).ready(function () {
     
         // Path to the sound files folder
         const soundFolder = 'sounds/';
-        const soundPath = `${soundFolder}${soundName}.mp3`;
+        const soundPath = `${soundFolder}${soundName}.wav`;
     
         // Create an audio object
         const audio = new Audio(soundPath);

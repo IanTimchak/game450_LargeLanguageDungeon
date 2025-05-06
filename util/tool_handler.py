@@ -176,7 +176,7 @@ class ToolHandler:
         if not sound_name:
             return "invalid input parameters. Please provide a valid sound_name."
 
-        if volume < 1 or volume > 10:
+        if int(volume) < 1 or int(volume) > 10:
             return "invalid input parameters. Volume must be between 1 and 10."
 
         print(f'[DEBUG] play_sound_effect called with sound_name="{sound_name}", volume={volume}, loop={loop}')
