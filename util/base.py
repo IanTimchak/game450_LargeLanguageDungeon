@@ -23,6 +23,7 @@ def stringify_tools():
         tools = json.load(file)
     return json.dumps(tools, indent=0)
 
+
 class DungeonMaster:
     def __init__(self):
         self.game_log = ['START']

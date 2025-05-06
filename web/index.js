@@ -41,7 +41,7 @@ $(document).ready(function () {
         const audio = new Audio(soundPath);
     
         // Set volume (scale 0.0 to 1.0)
-        audio.volume = .1;//volume / 30;
+        audio.volume = volume / 30;
     
         // Set loop if specified
         audio.loop = false;
