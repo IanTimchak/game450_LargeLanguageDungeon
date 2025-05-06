@@ -88,6 +88,8 @@ class ChromaDBClient:
     def peek(self):
         """
         Peek at the collection to see its contents
+        Useful for debugging
+        Not intended for use by the LLM
         """
         return self.collection.peek()
 

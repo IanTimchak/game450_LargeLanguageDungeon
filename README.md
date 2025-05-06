@@ -18,3 +18,26 @@ Large Language Dungeons is an AI-based dungeon master client that uses large lan
 1. Clone the repository:
    ```bash
    git clone https://github.com/IanTimchak/LLD.git
+2. Install necessary dependencies
+   ```bash
+   npm install
+   pip install ollama, chromadb, langchain, eel
+3. Install [Ollama](https://ollama.com/), if it is not already on your system.
+4. Pull the necessary models from Ollama.
+   ```bash
+   ollama pull llama3.2:latest nomic-embed-text
+   ```
+
+## Running the application
+### Starting the Game Server
+In order to start the game server, run `game.py` in a dedicated terminal.
+Once it is running, a countdown will begin for all players to connect to
+the server.
+
+### Starting the Player Client
+To start the player client, run `app.py` in a dedicated terminal. This will
+launch an electron application to host the UI for interacting with the
+LLM server. Input the host and port of the server (found in `dndnetwork.py`)
+and your player name for the session. Do this within the server countdown, and
+you will join the LLM server.
+   
