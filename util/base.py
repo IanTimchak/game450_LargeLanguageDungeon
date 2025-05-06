@@ -34,8 +34,7 @@ class DungeonMaster:
                                            #provide a reference to the server for TemplateChat to use
                                            dungeon_master=self,
                                            sounds=compile_sounds(),
-                                           tool_definitions=stringify_tools(),
-                                           players=self.server.get_player_names())
+                                           tool_definitions=stringify_tools())
         self.start = True
         # Initialize the ChromaDB client as a member variable
         self.rag = chroma(
