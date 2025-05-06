@@ -86,3 +86,17 @@ Infinite loop of attempting to do an operation on something that is not a socket
 - Defines Player class
   - 
 
+
+
+
+Update Readme.md so that it includes known errors that we know about and workarounds to some issues
+  -> Game not being able to be force closed
+      S: close the terminal it is running in.
+
+  -> whatever else u can think of to cover our app
+
+Finalize project.md, go over the system prompt and notice what I changed for prompt engineering. 
+
+Clean up repo
+
+Make sure everything is working so it works on submission
