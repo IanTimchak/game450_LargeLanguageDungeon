@@ -27,13 +27,13 @@
   - [ ] Template Loading Tool
     - PARAMS: Template Name, Context, tbd.
   - [ ] Image Generation Tool
-  - [ ] Dice Rolling Tool / Skill Check Tool
+  - [x] Dice Rolling Tool / Skill Check Tool
   - [x] Story Recall Tool (RAG)
   - [x] Add chunk to RAG database
   - [ ] Enemy/Player information lookup
-  - [ ] session info loading
-  - [ ] session summary generation
-  - [ ] side quest/event generator
+  - [x] session info loading
+  - [x] session summary generation
+  - [x] side quest/event generator
   - [ ] text to speech
   - [ ] loot generator
   - [ ] Rule quereying
