@@ -1,0 +1,35 @@
+{
+    "inventory": [
+      {
+        "name": "",
+        "quantity": 0,
+        "description": "",
+        "weight": 0.0
+      }
+    ],
+    "stats": {
+      "strength": { "value": 0, "modifier": 0 },
+      "dexterity": { "value": 0, "modifier": 0 },
+      "constitution": { "value": 0, "modifier": 0 },
+      "intelligence": { "value": 0, "modifier": 0 },
+      "wisdom": { "value": 0, "modifier": 0 },
+      "charisma": { "value": 0, "modifier": 0 }
+    },
+    "skills": [
+      {
+        "name": "",
+        "stat": "",
+        "proficient": false,
+        "total": 0
+      }
+    ],
+    "player_meta": {
+      "name": "",
+      "class": "",
+      "race": "",
+      "alignment": "",
+      "level": 0,
+      "exp": 0,
+      "background": ""
+    }
+  }

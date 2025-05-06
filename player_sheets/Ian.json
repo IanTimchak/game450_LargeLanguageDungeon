@@ -1,0 +1,48 @@
+{
+    "inventory": [
+      {
+        "name": "Shortsword",
+        "quantity": 1,
+        "description": "A light melee weapon.",
+        "weight": 2.0
+      },
+      {
+        "name": "Health Potion",
+        "quantity": 3,
+        "description": "Heals 2d4+2 HP.",
+        "weight": 0.5
+      }
+    ],
+    "stats": {
+      "strength": { "value": 14, "modifier": 2 },
+      "dexterity": { "value": 16, "modifier": 3 },
+      "constitution": { "value": 12, "modifier": 1 },
+      "intelligence": { "value": 10, "modifier": 0 },
+      "wisdom": { "value": 13, "modifier": 1 },
+      "charisma": { "value": 8, "modifier": -1 }
+    },
+    "skills": [
+      {
+        "name": "Stealth",
+        "stat": "dexterity",
+        "proficient": true,
+        "total": 5
+      },
+      {
+        "name": "Arcana",
+        "stat": "intelligence",
+        "proficient": false,
+        "total": 0
+      }
+    ],
+    "player_meta": {
+      "name": "Ian",
+      "class": "Rogue",
+      "race": "Elf",
+      "alignment": "Chaotic Good",
+      "level": 3,
+      "exp": 900,
+      "background": "Criminal"
+    }
+  }
+  

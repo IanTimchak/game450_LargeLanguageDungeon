@@ -17,7 +17,7 @@ import threading
 import time
 
 class DungeonMasterServer:
-    def __init__(self, game_log, dm_hook=lambda : '', host="localhost", port=19742, countdown=20):
+    def __init__(self, game_log, dm_hook=lambda : '', host="localhost", port=19742, countdown=10):
         self.host = host
         self.port = port
         self.countdown = countdown
@@ -164,6 +164,12 @@ class DungeonMasterServer:
         out_msg = f"[{name}] -> {msg}\n".encode()
         self.broadcast(out_msg)
 
+    def broadcast_event(self, instruction: dict):
+        """Send an instruction to all connected players."""
+        import json
+        instruction_message = f"[INSTRUCTION]{json.dumps(instruction)}".encode()
+        self.broadcast(instruction_message)
+
     def broadcast(self, message: bytes):
         """Send a message to all connected players."""
         print(f"[LOG] Broadcasting: {message.decode().strip()}")
@@ -185,7 +191,7 @@ class PlayerClient:
         self.host = host
         self.port = port
         self._name = name
-        self.subscribers = []
+        self.subscribers = {}
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     @property
@@ -202,8 +208,8 @@ class PlayerClient:
         self.host = host
         self.port = port
 
-    def add_subscriber(self, subscriber):
-        self.subscribers.append(subscriber)
+    def add_subscriber(self, subscriber, name):
+        self.subscribers[name] = subscriber
 
     def receive_messages(self):
         while True:
@@ -211,13 +217,36 @@ class PlayerClient:
                 data = self.sock.recv(8192)
                 if not data:
                     break
+                message = data.decode().strip()
+                
                 print(data.decode().strip())
-                # Notify subscribers
-                for subscriber in self.subscribers:
-                    subscriber(data.decode().strip())
+                 # Check for message type
+                if message.startswith("[INSTRUCTION]"):
+                    # Extract and handle the instruction
+                    import json
+                    instruction = json.loads(message[len("[INSTRUCTION]"):])
+                    self.handle_instruction(instruction)
+                    
+                else:
+                    self.subscribers["send_ai_response"](message)
             except ConnectionResetError:
                 print(f"[LOG] Connection closed by server.")
                 break
+
+    def handle_instruction(self, instruction: dict):
+        """Handle instructions sent by the server."""
+        action = instruction.get("action")
+        parameters = instruction.get("parameters", {})
+
+        if action == "play_sound_effect":
+            sound_name = parameters.get("sound_name")
+            volume = parameters.get("volume", 5)
+            loop = parameters.get("loop", False)
+            print(f"[INSTRUCTION] Play sound: {sound_name}, Volume: {volume}, Loop: {loop}")
+            # Call the exposed eel function to play the sound
+            # eel.playSoundEffect(sound_name, volume, loop)
+            send_instruction = self.subscribers["play_sound_effect"](sound_name, volume, loop)
+            
 
     def send_message(self, msg: str):
         """Send a message to the DM (e.g. the player's action)."""

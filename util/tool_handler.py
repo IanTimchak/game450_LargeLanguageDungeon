@@ -1,6 +1,6 @@
 
 from util.llm_utils import tool_tracker, generate_single_response
-import random
+import random, os, json
 class ToolHandler:
     def __init__(self, DungeonMaster):
         self.network_model = DungeonMaster #Carries the DM Server variables and functions, such as rag
@@ -113,7 +113,91 @@ class ToolHandler:
         print(f'[DEBUG] Generated NPC: {npc_description}')
 
         return npc_description
+    
+    #retrieve_active_player_sheets
+    def retrieve_active_player_sheets(self, include_inventory: bool, include_stats: bool, include_skills: bool) -> str:
+        """
+        Retrieves all active player character sheets for the current session.
 
-# #generate new npc
+        Args:
+            include_inventory (bool): Whether to include the players' inventory details.
+            include_stats (bool): Whether to include the players' stats.
+            include_skills (bool): Whether to include the players' skills.
+
+        Returns:
+            str: A stringified JSON containing the filtered player sheets.
+        """
+        player_sheets_folder = 'player_sheets'  # Folder containing player sheet JSON files
+        player_sheets_data = []
+
+        print(f'[DEBUG] retrieve_active_player_sheets called with include_inventory={include_inventory}, include_stats={include_stats}, include_skills={include_skills}')
+
+        # Iterate through all JSON files in the player_sheets folder
+        for filename in os.listdir(player_sheets_folder):
+            if filename.endswith('.json'):
+                file_path = os.path.join(player_sheets_folder, filename)
+                with open(file_path, 'r') as file:
+                    player_data = json.load(file)
+
+                    # Filter the data based on the parameters
+                    filtered_data = {}
+                    if include_inventory and 'inventory' in player_data:
+                        filtered_data['inventory'] = player_data['inventory']
+                    if include_stats and 'stats' in player_data:
+                        filtered_data['stats'] = player_data['stats']
+                    if include_skills and 'skills' in player_data:
+                        filtered_data['skills'] = player_data['skills']
+
+                    # Add the filtered data to the result list
+                    player_sheets_data.append({
+                        "player_meta": player_data["player_meta"],
+                        "data": filtered_data
+                    })
+
+        # Convert the result to a stringified JSON
+        result = json.dumps(player_sheets_data, indent=2)
+        print(f'[DEBUG] Retrieved player sheet data: {result}')
+
+        return result
+    
+    #play_sound_effect
+    def play_sound_effect(self, sound_name: str, volume: int = 5, loop: bool = False) -> str:
+        """
+        Plays a sound effect on the user client.
+
+        Args:
+            sound_name (str): The name or identifier of the sound effect to play (e.g., 'dice_roll', 'sword_clash').
+            volume (int): The volume level of the sound effect (e.g., 1 for low, 10 for maximum). Default is 5.
+            loop (bool): Whether the sound effect should loop continuously. Default is False.
+
+        Returns:
+            str: A confirmation message indicating the sound effect was broadcasted.
+        """
+        if not sound_name:
+            return "invalid input parameters. Please provide a valid sound_name."
+
+        if volume < 1 or volume > 10:
+            return "invalid input parameters. Volume must be between 1 and 10."
+
+        print(f'[DEBUG] play_sound_effect called with sound_name="{sound_name}", volume={volume}, loop={loop}')
+
+        # Prepare the instruction to broadcast to all clients
+        instruction = {
+            "action": "play_sound_effect",
+            "parameters": {
+                "sound_name": sound_name,
+                "volume": volume,
+                "loop": loop
+            }
+        }
+
+        # Use the network model to broadcast the instruction
+        self.network_model.server.broadcast_event(instruction)
+
+        print(f'[DEBUG] Sound effect instruction broadcasted: {instruction}')
+
+        return f"Sound effect '{sound_name}' with volume {volume} and loop={loop} broadcasted successfully."
+
+# # #generate new npc
 # tool_handler = ToolHandler(None)
 # tool_handler.generate_new_npc(role="merchant", background="a mysterious traveler from the east")

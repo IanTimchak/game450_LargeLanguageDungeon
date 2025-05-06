@@ -27,6 +27,32 @@ $(document).ready(function () {
         }
     });
 
+    //playSound
+    // Expose the function to Python via eel
+    eel.expose(playSoundEffect);
+    function playSoundEffect(soundName, volume = 5, loop = false) {
+        console.log(`[DEBUG] playSoundEffect called with soundName='${soundName}', volume=${volume}, loop=${loop}`);
+    
+        // Path to the sound files folder
+        const soundFolder = 'sounds/';
+        const soundPath = `${soundFolder}${soundName}.mp3`;
+    
+        // Create an audio object
+        const audio = new Audio(soundPath);
+    
+        // Set volume (scale 0.0 to 1.0)
+        audio.volume = .1;//volume / 30;
+    
+        // Set loop if specified
+        audio.loop = false;
+    
+        // Play the sound
+        audio.play().catch(error => {
+            console.error(`[ERROR] Failed to play sound '${soundName}':`, error);
+        });
+    }
+    
+
     eel.expose(addAiMessage);
     function addAiMessage(message) {
         const aiMessage = document.createElement('div');

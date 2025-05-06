@@ -38,11 +38,28 @@ def connect_player(host, port, name):
         player = Player(name)
         player.set_connection(host, int(port))
         player.connect()
-        player.add_subscriber(send_ai_response)
+        player.add_subscriber(send_ai_response, "send_ai_response")
+        player.add_subscriber(play_sound_effect, "play_sound_effect")
         print(f"Player {name} connected to server at {host}:{port}")
         
     except Exception as e:  
         print(f"Error connecting player: {e}")
+
+
+@eel.expose
+def play_sound_effect(sound_name, volume=5, loop=False):
+    """
+    Plays a sound effect on the client's end through the Electron app.
+
+    Args:
+        sound_name (str): The name or identifier of the sound effect to play.
+        volume (int): The volume level of the sound effect (1 to 10). Default is 5.
+        loop (bool): Whether the sound effect should loop continuously. Default is False.
+    """
+    print(f"[DEBUG] play_sound_effect called with sound_name='{sound_name}', volume={volume}, loop={loop}")
+
+    # Call the JavaScript function in the Electron app to play the sound
+    eel.playSoundEffect(sound_name, volume, loop)
 
 #player = Player("Goredawn the Gladiator")
 

@@ -97,8 +97,8 @@ class Player:
     def unjoin(self):
         self.client.unjoin()
     
-    def add_subscriber(self, subscriber):
-        self.client.add_subscriber(subscriber)
+    def add_subscriber(self, subscriber, name):
+        self.client.add_subscriber(subscriber, name)
 
     def take_turn(self, message):
         self.client.send_message(message)
