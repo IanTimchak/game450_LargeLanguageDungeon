@@ -121,7 +121,7 @@ class TemplateChat:
                     self.messages.append({'role': 'tool',
                                             'name': call.function.name,
                                             'arguments': call.function.arguments,
-                                            'content': '[TCR] ' + self.dungeon_master.process_function_call(call.function) + ' [/TCR]'
+                                            'content': '[TCR] ' + self.dungeon_master.tool_handler.process_function_call(call.function) + ' [/TCR]'
                                             })
             except Exception as e:
                 print(f"[ERROR] Error processing tool call: {e}")
