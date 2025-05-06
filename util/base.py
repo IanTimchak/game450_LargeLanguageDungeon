@@ -28,7 +28,7 @@ class DungeonMaster:
     def __init__(self):
         self.game_log = ['START']
         self.server = DungeonMasterServer(self.game_log, self.dm_turn_hook)
-        self.chat = TemplateChat.from_file('util/templates/dm_bryan.json', 
+        self.chat = TemplateChat.from_file('util/templates/MAIN_DM_TEMPLATE.json', 
                                            sign='hellogamers',
                                            process_response=TemplateChat.process_response,
                                            #provide a reference to the server for TemplateChat to use
