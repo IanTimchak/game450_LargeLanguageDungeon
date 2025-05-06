@@ -11,7 +11,7 @@
     ],
     "tools": [
     {
-      "type": "function",
+      "type": "function", 
       "function": {
         "name": "retrieve_session_info",
         "description": "Querys the Chromadb database containing past messages from the model for additional context.",
@@ -36,6 +36,10 @@
         "name": "roll_dice",
         "description": "Simulates rolling dice for skill checks, combat, or other game mechanics.",
         "parameters": {
+          "player": {
+            "type": "string",
+            "description": "The player that the roll is attributed towards."
+          },
           "max_roll": {
             "type": "integer",
             "description": "The maximum roll value."

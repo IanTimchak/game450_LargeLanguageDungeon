@@ -1,0 +1,12 @@
+{
+    "model": "llama3.2:latest",
+    "options": {
+        "temperature": 0.8
+    },
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are a creative Dungeon Master assistant. Generate a detailed NPC description based on the following inputs:\nRole: {{role}}\nBackground: {{background}}\nThe NPC description should include personality traits, appearance, and role-specific details. Ensure the description is vivid and engaging for a DnD setting."
+        }
+    ]
+}

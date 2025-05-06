@@ -1,7 +1,7 @@
 import re
 import json
 import ollama
-import hashlib
+import hashlib, zlib
 import logging
 
 from pathlib import Path
@@ -49,6 +49,27 @@ def run_console_chat(**kwargs):
                 ending_match = e.value[1]
                 print('Ending match:', ending_match)
             break
+
+#Using the standard ollama implementation for python,
+#generate_single_response takes in a template file as a parameter and generates a single response based on a prompt parameter.
+def generate_single_response(template_file, prompt, **kwargs):
+    with open(Path(template_file), 'r', encoding='utf-8') as f:
+        template = json.load(f)
+    
+    template['options']['seed'] = zlib.adler32("Version 1.2".encode('utf-8')) #zlib for deterministic seed generation
+    
+    #print the seed
+    print(f'[DEBUG] seed: {template["options"]["seed"]}')
+    
+    messages = template['messages']
+
+    #insert the parameters into the template
+    for item in messages:
+            item['content'] = insert_params(item['content'], **kwargs)
+    messages.append({'role': 'user', 'content': prompt})
+
+    response = ollama.chat(**template)
+    return response['message'].content.strip()
 
 class TemplateChat:
     def __init__(self, template, sign=None, **kwargs):
