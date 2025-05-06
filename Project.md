@@ -36,6 +36,14 @@
 
 - Scenario 5 was achieved through a pair of RAG implementation and a custom tool call. Using our RAG database that includes previous DM messages, we defined a tool call titled `retrieve_session_info` that queries the database for information relevant to the search string it provides. The effect of this is that the DM has an enhanced ability to recall prior information from earlier in a session.
 
+- Scenario 6 can be accomplished using the `roll_dice` tool call. The DM model has access to the `player`, `max_roll`, `min_roll`, `quantity`, and `modifier` parameters. These control who the roll is for (in the case of multiple players), the highest and lowest values on the die, the amount of dice being rolled, and the modifier to the roll if any (such as a siler sword doing +1 damage against vampires).
+
+- Scenario 7 is possible through a tool call simply named `generate_event`. This event activates a separate LLM template, and asks it to generate a new event based upon a context string passed to it by the DM and a desired complexity level.
+
+- In the same fashion as 7, scenario 8 is accomplished through the tool call `generate_npc`. This function calls another separate LLM template designed for creating new NPCs, and asks it to generate one based off of the NPCs intended role (such as warrior, chef, villain, king, etc.) and a background to refine the model's output.
+
+- Scenario 9 is handled by the tool call `play_sound_effect`, which gives the DM the ability to select a sound file, and control the relative volume of it as well as if it should loop or not.
+
 ## 4: Planning & Reasoning
 
 ## 5: RAG Implementation
