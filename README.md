@@ -43,7 +43,9 @@ Naturally, our system preserves the properties and interactions that you would e
 3. Install [Ollama](https://ollama.com/), if it is not already on your system.
 4. Pull the necessary models from Ollama.
    ```bash
-   ollama pull llama3.2:latest nomic-embed-text qwen3:1.7b
+   ollama pull llama3.2:latest
+   ollama pull nomic-embed-text
+   ollama pull qwen3:1.7b
    ```
 
 ## Running the application
