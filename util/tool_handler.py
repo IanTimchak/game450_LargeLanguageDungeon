@@ -79,7 +79,7 @@ class ToolHandler:
             prompt=prompt,
             complexity=str(complexity),
         )
-        #print(f'[DEBUG] Generated event: {event}')
+        print(f'[DEBUG] Generated event: {event}')
 
         return event
 
