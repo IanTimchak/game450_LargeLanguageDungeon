@@ -68,4 +68,3 @@ Our app allows the players to maintain their own character sheets that will be r
      - To end the game server process, please fully close the terminal from VSCode, or however else it is being run.
 2. Host refusing to connect to the client
    - If your client does not recieve messages from the server after attempting to join and you are recieving an error that says the host refused connection, try changing the port that the server is being hosted on.
-3. 
